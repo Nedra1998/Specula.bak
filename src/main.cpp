@@ -3,7 +3,7 @@
 
 #include <CLI/CLI.hpp>
 
-#include "specula/log.hpp"
+#include "specula/specula.hpp"
 
 int main(int argc, char *argv[]) {
   CLI::App app{"Lua controled graphics rendering engine"};
@@ -27,6 +27,9 @@ int main(int argc, char *argv[]) {
   specula::ldatetime();
   specula::linfo("Lua Source: %s", lua_source.c_str());
   specula::linfo("Render Method: %s", render_method.c_str());
+
+  specula::geometry::Vector3f a(1, 2, 3);
+  specula::linfo("Vector3f: %s", a.str().c_str());
 
   return 0;
 }
