@@ -4,7 +4,6 @@
 #include "cli/cli.hpp"
 #include "fmt.hpp"
 #include "fs.hpp"
-#include "geometry/geometry.hpp"
 #include "log.hpp"
 #include "version.hpp"
 

@@ -1,6 +1,6 @@
-#ifndef SPECULA_GEOMETRY_GEOMETRY_HPP_
-#define SPECULA_GEOMETRY_GEOMETRY_HPP_
+#ifndef SPECULA_GEOMETRY_HPP_
+#define SPECULA_GEOMETRY_HPP_
 
-#include "vector.hpp"
+#include "vec2.hpp"
 
-#endif  // SPECULA_GEOMETRY_GEOMETRY_HPP_
+#endif  // SPECULA_GEOMETRY_HPP_
