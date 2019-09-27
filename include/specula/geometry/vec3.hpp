@@ -3,12 +3,17 @@
 
 #include <cassert>
 #include <cmath>
+#include <tuple>
 
 namespace specula {
   template <typename _T> class _vec3 {
   public:
     _vec3() : x(), y(), z() {}
     _vec3(const _T &x, const _T &y, const _T &z) : x(x), y(y), z(z) {}
+    template <typename _U>
+    _vec3(const _vec3<_U> &v)
+        : x(static_cast<_T>(v.x)), y(static_cast<_T>(v.y)),
+          z(static_cast<_T>(v.z)) {}
 
     inline _T operator[](const std::size_t &i) const {
       assert(i >= 0 && i <= 2);
@@ -181,6 +186,19 @@ namespace specula {
   inline _vec3<_T> permute(const _vec3<_T> *v, const std::size_t &x,
                            const std::size_t &y, const std::size_t &z) {
     return _vec3<_T>(v[x], v[y], v[z]);
+  }
+
+  // auto[a, b, c] = coordinate_system(a);
+  template <typename _T>
+  inline std::tuple<_vec3<_T>, _vec3<_T>, _vec3<_T>>
+  coordinate_system(const _vec3<_T> &v1) {
+    _vec3<_T> v2;
+    if (std::abs(v1.x) > std::abs(v1.y)) {
+      v2 = _vec3<_T>(-v1.z, 0, v1.x) / std::sqrt(v1.x * v1.x + v1.z * v1.z);
+    } else {
+      v2 = _vec3<_T>(0, v1.z, -v1.y) / std::sqrt(v1.y * v1.y + v1.z * v1.z);
+    }
+    return std::make_tuple(v1, v2, cross(v1, v2));
   }
 
 } // namespace specula

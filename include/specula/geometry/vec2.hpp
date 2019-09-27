@@ -9,6 +9,9 @@ namespace specula {
   public:
     _vec2() : x(), y() {}
     _vec2(const _T &x, const _T &y) : x(x), y(y) {}
+    template <typename _U>
+    _vec2(const _vec2<_U> &v)
+        : x(static_cast<_T>(v.x)), y(static_cast<_T>(v.y)) {}
 
     inline _T operator[](const std::size_t &i) const {
       assert(i >= 0 && i <= 1);
