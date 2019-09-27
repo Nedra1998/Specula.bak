@@ -44,7 +44,8 @@ namespace specula {
     inline typename std::enable_if<std::is_convertible<_U, _T>::value,
                                    _point3<_T>>::type
     operator+(const _point3<_U> &v) const {
-      return _point3<_T>(x + static_cast<_T>(v.x), y + static_cast<_T>(v.y));
+      return _point3<_T>(x + static_cast<_T>(v.x), y + static_cast<_T>(v.y),
+                         z + static_cast<_T>(v.z));
     }
     template <typename _U>
     inline typename std::enable_if<std::is_convertible<_U, _T>::value,
@@ -52,6 +53,7 @@ namespace specula {
     operator+(const _point3<_U> &v) {
       x += static_cast<_T>(v.x);
       y += static_cast<_T>(v.y);
+      z += static_cast<_T>(v.z);
       return *this;
     }
 
@@ -59,13 +61,15 @@ namespace specula {
     inline typename std::enable_if<std::is_convertible<_U, _T>::value,
                                    _vec3<_T>>::type
     operator-(const _point3<_U> &p) const {
-      return _vec3<_T>(x - static_cast<_T>(p.x), y - static_cast<_T>(p.y));
+      return _vec3<_T>(x - static_cast<_T>(p.x), y - static_cast<_T>(p.y),
+                       z - static_cast<_T>(p.z));
     }
     template <typename _U>
     inline typename std::enable_if<std::is_convertible<_U, _T>::value,
                                    _point3<_T>>::type
     operator-(const _vec3<_U> &v) const {
-      return _point3<_T>(x - static_cast<_T>(v.x), y - static_cast<_T>(v.y));
+      return _point3<_T>(x - static_cast<_T>(v.x), y - static_cast<_T>(v.y),
+                         z - static_cast<_T>(v.z));
     }
     template <typename _U>
     inline typename std::enable_if<std::is_convertible<_U, _T>::value,
@@ -73,6 +77,7 @@ namespace specula {
     operator-(const _vec3<_U> &v) {
       x -= static_cast<_T>(v.x);
       y -= static_cast<_T>(v.y);
+      z -= static_cast<_T>(v.z);
       return *this;
     }
 
@@ -80,7 +85,8 @@ namespace specula {
     inline typename std::enable_if<std::is_convertible<_U, _T>::value,
                                    _point3<_T>>::type
     operator*(const _U &s) {
-      return _point3<_T>(x * static_cast<_T>(s), y * static_cast<_T>(s));
+      return _point3<_T>(x * static_cast<_T>(s), y * static_cast<_T>(s),
+                         z * static_cast<_T>(s));
     }
     template <typename _U>
     inline typename std::enable_if<std::is_convertible<_U, _T>::value,
@@ -88,13 +94,15 @@ namespace specula {
     operator*=(const _U &s) {
       x *= static_cast<_T>(s);
       y *= static_cast<_T>(s);
+      z *= static_cast<_T>(s);
       return *this;
     }
     template <typename _U>
     inline typename std::enable_if<std::is_convertible<_U, _T>::value,
                                    _point3<_T>>::type
     operator/(const _U &s) {
-      return _point3<_T>(x / static_cast<_T>(s), y / static_cast<_T>(s));
+      return _point3<_T>(x / static_cast<_T>(s), y / static_cast<_T>(s),
+                         z / static_cast<_T>(s));
     }
     template <typename _U>
     inline typename std::enable_if<std::is_convertible<_U, _T>::value,
@@ -102,6 +110,7 @@ namespace specula {
     operator/=(const _U &s) {
       x /= static_cast<_T>(s);
       y /= static_cast<_T>(s);
+      z /= static_cast<_T>(s);
       return *this;
     }
 
@@ -138,30 +147,32 @@ namespace specula {
                                  _point3<_T>>::type
   min(const _point3<_T> &v1, const _point3<_U> &v2) {
     return _point3<_T>(std::min(v1.x, static_cast<_T>(v2.x)),
-                       std::min(v1.y, static_cast<_T>(v2.y)));
+                       std::min(v1.y, static_cast<_T>(v2.y)),
+                       std::min(v1.z, static_cast<_T>(v2.z)));
   }
   template <typename _T, typename _U>
   inline typename std::enable_if<std::is_convertible<_U, _T>::value,
                                  _point3<_T>>::type
   max(const _point3<_T> &v1, const _point3<_U> &v2) {
     return _point3<_T>(std::max(v1.x, static_cast<_T>(v2.x)),
-                       std::max(v1.y, static_cast<_T>(v2.y)));
+                       std::max(v1.y, static_cast<_T>(v2.y)),
+                       std::max(v1.z, static_cast<_T>(v2.z)));
   }
 
   template <typename _T> _point3<_T> floor(const _point3<_T> &p) {
-    return _point3<_T>(std::floor(p.x), std::floor(p.y));
+    return _point3<_T>(std::floor(p.x), std::floor(p.y), std::floor(p.z));
   }
   template <typename _T> _point3<_T> ceil(const _point3<_T> &p) {
-    return _point3<_T>(std::ceil(p.x), std::ceil(p.y));
+    return _point3<_T>(std::ceil(p.x), std::ceil(p.y), std::floor(p.z));
   }
   template <typename _T> _point3<_T> abs(const _point3<_T> &p) {
-    return _point3<_T>(std::abs(p.x), std::abs(p.y));
+    return _point3<_T>(std::abs(p.x), std::abs(p.y), std::abs(p.z));
   }
 
   template <typename _T>
-  inline _point3<_T> permute(const _point3<_T> *v, const std::size_t &x,
-                             const std::size_t &y) {
-    return _point3<_T>(v[x], v[y]);
+  inline _point3<_T> permute(const _point3<_T> *p, const std::size_t &x,
+                             const std::size_t &y, const std::size_t &z) {
+    return _point3<_T>(p[x], p[y], p[z]);
   }
 } // namespace specula
 

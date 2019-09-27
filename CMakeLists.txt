@@ -75,7 +75,10 @@ set(TEST_SOURCES
     tests/main.cpp
     tests/log.cpp
     tests/geometry/vec2.cpp
-    tests/geometry/vec3.cpp)
+    tests/geometry/vec3.cpp
+    tests/geometry/point2.cpp
+    tests/geometry/point3.cpp
+    tests/geometry/normal.cpp)
 
 configure_file("${PROJECT_SOURCE_DIR}/include/version.hpp.in"
                "${PROJECT_BINARY_DIR}/version.hpp")

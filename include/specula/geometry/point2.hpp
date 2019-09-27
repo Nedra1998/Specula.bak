@@ -155,9 +155,9 @@ namespace specula {
   }
 
   template <typename _T>
-  inline _point2<_T> permute(const _point2<_T> *v, const std::size_t &x,
+  inline _point2<_T> permute(const _point2<_T> *p, const std::size_t &x,
                              const std::size_t &y) {
-    return _point2<_T>(v[x], v[y]);
+    return _point2<_T>(p[x], p[y]);
   }
 } // namespace specula
 
